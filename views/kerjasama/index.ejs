@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        /* --- STYLING BREADCRUMBS (HORIZONTAL) --- */
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            list-style: none; /* Menghilangkan nomor urut 1, 2, 3 */
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Otomatis memunculkan karakter '/' di antara menu */
+        .breadcrumb-item + .breadcrumb-item::before {
+            float: left;
+            padding-right: 8px;
+            padding-left: 8px;
+            color: #6c757d;
+            content: "/";
+        }
+
+        .breadcrumb-item.active {
+            color: #6c757d;
+        }
+
+        /* --- STYLING HALAMAN UTAMA --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f1f3f5;
+        }
+        .logout-btn {
+            float: right;
+            color: red;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <% if (typeof breadcrumbs !== 'undefined') { %>
+                    <% breadcrumbs.forEach((crumb) => { %>
+                        <li class="breadcrumb-item <%= crumb.active ? 'active' : '' %>">
+                            <% if (!crumb.active) { %>
+                                <a href="<%= crumb.link %>"><%= crumb.name %></a>
+                            <% } else { %>
+                                <%= crumb.name %>
+                            <% } %>
+                        </li>
+                    <% }); %>
+                <% } %>
+            </ol>
+        </nav>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+        <h1><%= title %></h1>
+        <p>Log login: <strong><%= user.name %></strong> [Role: <%= user.role %>]</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Instansi / Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof data !== 'undefined' && data.length > 0) { %>
+                    <% data.forEach((item) => { %>
+                        <tr>
+                            <td><%= item.id %></td>
+                            <td><%= item.nama || item.nama_instansi || 'Data Kerjasama' %></td>
+                            <td>
+                                <button>Detail</button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #6c757d;">Belum ada data kerjasama tersedia.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

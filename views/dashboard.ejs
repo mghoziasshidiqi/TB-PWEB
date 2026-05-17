@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+<div class="mb-8">
+    <h2 class="text-3xl font-bold">Halo, <%= user.name %>!</h2>
+    <p class="text-slate-500">Anda masuk sebagai <span class="bc-badge bc-badge-primary bc-badge-sm"><%= user.role %></span></p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    
+    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Total Kerjasama</h3>
+        <div class="flex items-baseline gap-2">
+            <span class="text-4xl font-black text-blue-700"><%= totalKerjasama %></span>
+            <span class="text-slate-400 text-sm">Dokumen</span>
+        </div>
+        <div class="mt-6">
+            <a href="/kerjasama" class="bc-button bc-button-outline bc-button-sm w-full">Kelola Data</a>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Dokumen IA</h3>
+        <p class="text-4xl font-black text-slate-900">0</p>
+        <div class="mt-6">
+            <a href="/ia" class="bc-button bc-button-outline bc-button-sm w-full">Lihat IA</a>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Masa Berlaku</h3>
+        <p class="text-4xl font-black text-rose-600">0</p>
+        <div class="mt-6">
+            <a href="/expired" class="bc-button bc-button-outline bc-button-sm w-full">Cek Expired</a>
+        </div>
+    </div>
+
+</div>
+
+<% if (user.role === 'Admin') { %>
+<div class="bg-slate-900 rounded-xl p-8 text-white">
+    <h4 class="text-lg font-bold mb-2">Kontrol Admin</h4>
+    <p class="text-slate-400 text-sm mb-6">Kelola akses data master kerjasama FTI.</p>
+    <a href="/kerjasama/add" class="bc-button bc-button-primary px-8">Tambah Data Kerjasama Baru</a>
+</div>
+<% } %>
+
+<%- include('partials/footer') %>

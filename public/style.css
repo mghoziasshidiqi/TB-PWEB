@@ -1,0 +1,33 @@
+/* Styling Navigasi Breadcrumb */
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 20px;
+    list-style: none; /* Menghilangkan nomor urut 1, 2, 3 */
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+/* Otomatis memunculkan separator '/' di antara menu */
+.breadcrumb-item + .breadcrumb-item::before {
+    float: left;
+    padding-right: 8px;
+    padding-left: 8px;
+    color: #6c757d;
+    content: "/"; 
+}
+
+/* Warna untuk halaman yang sedang aktif */
+.breadcrumb-item.active {
+    color: #6c757d;
+}

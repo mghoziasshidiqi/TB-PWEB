@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --primary-blue: #2563eb;
+            --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            --border-color: #cbd5e1;
+            --danger-bg: #fef2f2;
+            --danger-text: #991b1b;
+            --danger-border: #ef4444;
+            --focus-ring: rgba(37, 99, 235, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .header-section h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1e3a8a;
+            margin: 0 0 6px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .header-section p {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .card-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            margin: 0 0 24px 0;
+        }
+
+        /* --- ALERT ERROR STYLE --- */
+        .error-alert {
+            background-color: var(--danger-bg);
+            color: var(--danger-text);
+            border-left: 4px solid var(--danger-border);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .error-icon {
+            background-color: var(--danger-border);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px var(--focus-ring);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-gradient);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .switch-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .switch-link a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        .footer-section {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 13px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <h1>SI-KERJASAMA</h1>
+        <p>Fakultas Teknologi Informasi</p>
+    </div>
+
+    <div class="card-container">
+        <div class="card-title">Silakan Masuk</div>
+
+        <% if (error) { %>
+            <div class="error-alert">
+                <span class="error-icon">✖</span>
+                <span><%= error %></span>
+            </div>
+        <% } %>
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label>Alamat Email</label>
+                <input type="email" name="email" placeholder="nama@email.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-submit">Masuk Sekarang</button>
+        </form>
+
+        <div class="switch-link">
+            Belum punya akun? <a href="/signup">Daftar Sekarang</a>
+        </div>
+    </div>
+
+    <div class="footer-section">
+        &copy; 2026 Kelompok A10 - UNAND
+    </div>
+
+</body>
+</html>
