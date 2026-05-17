@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SI-Kerjasama FTI
 
 Aplikasi pengelolaan data kerjasama Fakultas Teknologi Informasi UNAND.
@@ -22,3 +23,7 @@ Aplikasi pengelolaan data kerjasama Fakultas Teknologi Informasi UNAND.
 | [Nama 2] | [NIM] | Middleware autentikasi & ACL |
 | [Nama 3] | [NIM] | Routes, handler login/logout |
 | [Nama 4] | [NIM] | Frontend Basecoat UI |
+=======
+# TB-PWEB
+Aplikasi Pengelolaan Kerjasama FTI UNAND
+>>>>>>> c86f2b76ca2c4cc966d7b049ceee36f2114851ab
